@@ -1,0 +1,20 @@
+ul {
+	list-style-type: none;
+
+}
+
+
+
+
+.game li{
+	float: left;
+
+}
+
+.game input{
+	padding: 5px;
+	margin: 5px;
+}
+
+.game li:first-child{
+    clear:both;
