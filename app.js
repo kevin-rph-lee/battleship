@@ -21,7 +21,7 @@ function acknowledgeMessage(){
 
 
 function userSelect(x,y){
-        if (x == answer[0] && y== answer[1]){
+        if ((x == answer[0]) && (y== answer[1]){
 			$('.test').append('<p>You win!</p>');
 		} else{
 			$('.test').append('<p>You lose!</p>');
