@@ -2,14 +2,28 @@ ul {
 	list-style-type: none;
 
 }
-
-
-
-
-.game li{
+.buttonunknown{
 	float: left;
-
+  margin: 10px 10px;
+  padding: 40px 40px;
+  background-color: #1E90FF;
 }
+
+.buttonMissed{
+  float: left;
+  margin: 10px 10px;
+  padding: 40px 40px;
+  background-color: #ff0000;
+}
+
+.buttonHit{
+  float: left;
+  margin: 10px 10px;
+  padding: 40px 40px;
+  background-color: #40ff00;
+}
+
+
 
 .game input{
 	padding: 5px;
@@ -18,3 +32,4 @@ ul {
 
 .game li:first-child{
     clear:both;
+}

@@ -1,30 +1,40 @@
+
 var answerx = parseInt((Math.random() * (3 - 1 + 1)), 10) + 1;
 var answery = parseInt((Math.random() * (3 - 1 + 1)), 10) + 1;
 var answer = [answerx, answery];
-//parseInt((Math.random() * (max - min + 1)), 10) + min;
+var game = true;
+console.log(answerx + ' ' + answery);
 
-console.log(answer)
 
-function alertName(){
-	//Grabs text from name textbox and returns it
-		var test = document.getElementById('input').value;
-		alert('Hello ' + test);
+
+function selectSpace(x,y){
+  if(x== answerx && y==answery){
+    console.log('hit!');
+    $('.grid'+x+y).addClass('buttonHit');
+    $('.grid'+x+y).removeClass('buttonunknown');
+  } else{
+    console.log('missed!');
+    $('.grid'+x+y).addClass('buttonMissed');
+    $('.grid'+x+y).removeClass('buttonunknown');
+  }
 
 }
 
-
-function acknowledgeMessage(){
-        //acknowledges the button click by adding a paragraph to the html file
-        var acknowledge = $('<p> Button clicked</p>');
-        $('.test').append(acknowledge);
+function reset(){
+  $('[class^="grid"]').removeClass('buttonunknown');
+  $('[class^="grid"]').removeClass('buttonMissed');
+  $('[class^="grid"]').removeClass('buttonHit');
+  $('[class^="grid"]').addClass('buttonunknown');
+  answerx = parseInt((Math.random() * (3 - 1 + 1)), 10) + 1;
+  answery = parseInt((Math.random() * (3 - 1 + 1)), 10) + 1;
 }
 
 
-function userSelect(x,y){
-        if ((x == answer[0]) && (y== answer[1]){
-			$('.test').append('<p>You win!</p>');
-		} else{
-			$('.test').append('<p>You lose!</p>');
-		}
-}
+$(document).ready(function(){
+  $('#button11').on('click', function(){
+    if(answerx==1 && answery==1){
+      alert('test')
+    }
+  });
 
+});
