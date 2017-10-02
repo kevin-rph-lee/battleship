@@ -11,26 +11,51 @@
 
 		<main class= 'test'>
 
-		<p class= 'welcome'>Hello World</p>
+		<p class= 'welcome'>Battleship</p>
 
 		<div class = 'game'>
 			<ul>
-				<li class= 'grid11 buttonunknown' onclick='selectSpace(1,1)'></li>
-				<li class= 'grid12 buttonunknown' onclick='selectSpace(1,2)'></li>
-				<li class= 'grid13 buttonunknown' onclick='selectSpace(1,3)'></li>
+				<li id= 'grid11' class = 'buttonunknown' onclick='selectSpace(1,1)' data-isHit=false></li>
+				<li id= 'grid12' class = 'buttonunknown' onclick='selectSpace(1,2)' data-isHit=false></li>
+				<li id= 'grid13' class = 'buttonunknown' onclick='selectSpace(1,3)' data-isHit=false></li>
+				<li id= 'grid14' class = 'buttonunknown' onclick='selectSpace(1,4)' data-isHit=false></li>
+				<li id= 'grid15' class = 'buttonunknown' onclick='selectSpace(1,5)' data-isHit=false></li>
 			</ul>
 			<ul>
-				<li class= 'grid21 buttonunknown' onclick='selectSpace(2,1)'></li>
-				<li class= 'grid22 buttonunknown' onclick='selectSpace(2,2)'></li>
-				<li class= 'grid23 buttonunknown' onclick='selectSpace(2,3)'></li>
+				<li id= 'grid21' class = 'buttonunknown' onclick='selectSpace(2,1)' data-isHit=false></li>
+				<li id= 'grid22' class = 'buttonunknown' onclick='selectSpace(2,2)' data-isHit=false></li>
+				<li id= 'grid23' class = 'buttonunknown' onclick='selectSpace(2,3)' data-isHit=false></li>
+				<li id= 'grid24' class = 'buttonunknown' onclick='selectSpace(2,4)' data-isHit=false></li>
+				<li id= 'grid25' class = 'buttonunknown' onclick='selectSpace(2,5)' data-isHit=false></li>
 			</ul>
 			<ul>
-				<li class= 'grid31 buttonunknown' onclick='selectSpace(3,1)'></li>
-				<li class= 'grid32 buttonunknown' onclick='selectSpace(3,2)'></li>
-				<li class= 'grid33 buttonunknown' onclick='selectSpace(3,3)'></li>
+				<li id= 'grid31' class = 'buttonunknown' onclick='selectSpace(3,1)' data-isHit=false></li>
+				<li id= 'grid32' class = 'buttonunknown' onclick='selectSpace(3,2)' data-isHit=false></li>
+				<li id= 'grid33' class = 'buttonunknown' onclick='selectSpace(3,3)' data-isHit=false></li>
+				<li id= 'grid34' class = 'buttonunknown' onclick='selectSpace(3,4)' data-isHit=false></li>
+				<li id= 'grid35' class = 'buttonunknown' onclick='selectSpace(3,5)' data-isHit=false></li>
+			</ul>
+			<ul>
+				<li id= 'grid41' class = 'buttonunknown' onclick='selectSpace(4,1)' data-isHit=false></li>
+				<li id= 'grid42' class = 'buttonunknown' onclick='selectSpace(4,2)' data-isHit=false></li>
+				<li id= 'grid43' class = 'buttonunknown' onclick='selectSpace(4,3)' data-isHit=false></li>
+				<li id= 'grid44' class = 'buttonunknown' onclick='selectSpace(4,4)' data-isHit=false></li>
+				<li id= 'grid45' class = 'buttonunknown' onclick='selectSpace(4,5)' data-isHit=false></li>
+			</ul>
+			<ul>
+				<li id= 'grid51' class = 'buttonunknown' onclick='selectSpace(5,1)' data-isHit=false></li>
+				<li id= 'grid52' class = 'buttonunknown' onclick='selectSpace(5,2)' data-isHit=false></li>
+				<li id= 'grid53' class = 'buttonunknown' onclick='selectSpace(5,3)' data-isHit=false></li>
+				<li id= 'grid54' class = 'buttonunknown' onclick='selectSpace(5,4)' data-isHit=false></li>
+				<li id= 'grid55' class = 'buttonunknown' onclick='selectSpace(5,5)' data-isHit=false></li>
 			</ul>
 		</div>
-		<input type= 'button' value= 'Reset' onclick='reset();'/>
+		<input type= 'button' value= 'test targets' onclick='generateTargets2();'/>
+		<div class = 'display'>
+			<p class = 'turncounter'>You have 5 attempts left!</p>
+			<p class = 'wincounter'>You have 0 loses!</p>
+			<p class = 'losscounter'>You have 0 wins!</p>
+		</div>
 
 		</main>
 	<script src="jquery.min.js"></script>

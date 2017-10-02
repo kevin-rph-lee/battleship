@@ -3,11 +3,13 @@ ul {
 
 }
 .buttonunknown{
-	float: left;
+  float: left;
   margin: 10px 10px;
   padding: 40px 40px;
   background-color: #1E90FF;
 }
+
+
 
 .buttonMissed{
   float: left;
