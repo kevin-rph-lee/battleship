@@ -5,6 +5,12 @@ var answerx1 = 0;
 var answery1 = 0;
 var answerx2 = 0;
 var answery2 = 0;
+var grid = [];
+
+var answerx3 = 0;
+var answery3 = 0;
+var answerx4 = 0;
+var answery4 = 0;
 
 var turns = 5;
 var gameWinCounter= 0;
@@ -121,33 +127,35 @@ function gameEnd(){
 generateTargets();
 
 
-function generateTargets2(){
+function placeBoat1(){
+
   var loop = true;
+  var grid = [];
   answerx = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
   answery = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
   while(loop == true){
     x = parseInt((Math.random() * (4 - 1 + 1)), 10) + 1;
-    console.log("caluclating...   X: " + x);
+
 
     if(x==1){
       answerx1= answerx + 1;
       answery1= answery;
-      console.log("boat A " + answerx + ' ' + answery);
-      console.log("boat B " + answerx1 + ' ' + answery1);
 
       if( (0 == answerx1) || (answerx1 > 5) || (0 == answery1) || (answery1 > 5) ){
-        console.log(x);
+
           answerx1= answerx;
           answery1= answery;
 
-          console.log('invalid position');
+
       } else{
         answery2=answery;
         if((answerx1+1 > 5)){
           answerx2 = answerx - 1;
+        } else{
+          answerx2 = answerx1 +1;
         }
-        console.log("boat C " + answerx2 + ' ' + answery2);
-        console.log('valid position');
+
+
 
           loop = false;
       }
@@ -155,14 +163,13 @@ function generateTargets2(){
     }else if(x==2){
       answerx1= answerx - 1;
       answery1= answery;
-      console.log("boat A " + answerx + ' ' + answery);
-      console.log("boat B " + answerx1 + ' ' + answery1);
+
 
       if( (0 == answerx1) || (answerx1 > 5) || (0 == answery1) || (answery1 > 5) ){
 
         answerx1= answerx;
         answery1= answery;
-        console.log('invalid position');
+
 
       } else{
         //////////////////////
@@ -172,172 +179,188 @@ function generateTargets2(){
         }else{
           answerx2 = answerx1 -1;
         }
-        console.log("boat C " + answerx2 + ' ' + answery2);
-        console.log('valid position');
+
+
         loop = false;
       }
     }else if(x==3){
       answerx1= answerx;
       answery1= answery + 1;
-      console.log("boat A " + answerx + ' ' + answery);
-      console.log("boat B " + answerx1 + ' ' + answery1);
+
 
       if( (0 == answerx1) || (answerx1 > 5) || (0 == answery1) || (answery1 > 5) ){
 
-        console.log('invalid position');
+
         answerx1= answerx;
         answery1= answery;
 
       } else{
-        console.log('valid position');
+
         answerx2=answerx;
         if((answery1+1 > 5)){
           answery2 = answery-1;
+        } else{
+          answery2 = answery1 +1;
         }
-        console.log("boat C " + answerx2 + ' ' + answery2);
+
         loop = false;
       }
-    }else{
+    }else if (x==4){
       answerx1= answerx;
       answery1= answery - 1;
+
       if( (0 == answerx1) || (answerx1 > 5) || (0 == answery1) || (answery1 > 5) ){
         answerx1= answerx;
         answery1= answery;
-        console.log('invalid position');
       } else{
         answerx2=answerx;
         if((answery1-1 < 1)){
           answery2 = answery + 1;
+        }else{
+          answery2 = answery1-1;
         }
-        console.log("boat C " + answerx2 + ' ' + answery2);
-        console.log('valid position');
+
         loop = false;
 
       }
+    } else{
+      console.log("Error!");
     }
-
-
-  console.log(loop)
   }
+
+  placeBoat2();
+
+
+
+
 }
 
 
+function placeBoat2(){
+  var loop = true;
+  var x = 0
+  grid = [];
+  grid.push([answerx,answery]);
+  grid.push([answerx1,answery1]);
+  grid.push([answerx2,answery2])
+
+  answerx3= 0;
+  answery3= 0;
+  answerx4= 0;
+  answery4= 0;
+
+  while(loop == true){
+
+    answerx3 = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
+    answery3 = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
+    if(checkBoat(answerx3,answery3)==true){
+      break;
+    }
+  }
 
 
-/**
+
+
+
+  while(loop == true){
+
+    x = parseInt((Math.random() * (4 - 1 + 1)), 10) + 1;
+
+
+    console.log("Test A: " +answerx + " " + answery);
+    console.log("Test B: " +answerx1 + " " + answery1);
+    console.log("Test C: " +answerx2 + " " + answery2);
+    console.log("Test D: " +answerx3 + " " + answery3);
+    console.log("Test E: " +answerx4 + " " + answery4);
+    console.log(loop);
 
     if(x==1){
-      answerx1= answerx + 1;
-      answery1= answery;
-      console.log("boat A " + answerx + ' ' + answery);
-      console.log("boat B " + answerx1 + ' ' + answery1);
-      if( (0 == answerx1 > 5) || (0 == answery1 > 5) ){
-        console.log(x);
-        console.log("Eval 1: " + (0 == answerx1) );
-        console.log("Eval 2: " + (answerx1 > 5) );
-        console.log("Eval 3: " + (0 == answery1) );
-        console.log("Eval 4: " + (answery1 > 5) );
-        console.log("Eval 5: " + (0 == answerx1 > 5));
-        console.log("Eval 6: " + (0 == answery1 > 5));
-        console.log("Eval 7: " + (0 == answerx1 > 5) || (0 == answery1 > 5));
-          answery2 = answery;
-          answerx2 = answerx1 + 1;
-          if(answerx2 > 5){
-            answerx2= answerx-2;
-          }
-          console.log("boat C " + answerx2 + ' ' + answery2);
-
-          loop = false;
-          console.log('valid position');
-      } else{
-          answerx1= answerx;
-          answery1= answery;
-          console.log('valid position');
+      console.log(x);
+      answerx4= answerx3 + 1;
+      answery4= answery3;
+      if( (0 == answerx4) || (answerx4 > 5) || (0 == answery4) || (answery4 > 5) ){
+        console.log('invalid 1');
+          answerx4= answerx3;
+          answery4= answery3;
+      } else {
+        if(checkBoat(answerx4,answery4)==true){
+          console.log("Boat D: " + answerx3 + ' '+ answery3);
+          console.log("Boat E: " + answerx4 + ' '+ answery4);
+          loop =false;
+          console.log("turned false!");
+        }
       }
-
-    }else if(x==2){
-      answerx1= answerx - 1;
-      answery1= answery;
-      console.log("boat A " + answerx + ' ' + answery);
-      console.log("boat B " + answerx1 + ' ' + answery1);
-      if( (0 == answerx1 > 5) || (0 == answery1 > 5) ){
-        console.log(x);
-        console.log("Eval 1: " + (0 == answerx1) );
-        console.log("Eval 2: " + (answerx1 > 5) );
-        console.log("Eval 3: " + (0 == answery1) );
-        console.log("Eval 4: " + (answery1 > 5) );
-        console.log("Eval 5: " + (0 == answerx1 > 5));
-        console.log("Eval 6: " + (0 == answery1 > 5));
-        console.log("Eval 7: " + (0 == answerx1 > 5) || (0 == answery1 > 5));
-        answery2 = answery;
-        answerx2 = answerx1 - 1;
-        if(answerx2 == 0){
-           answerx2= answerx+2;
-          }
-          console.log("boat C " + answerx2 + ' ' + answery2);
-
-
-        console.log('valid position');
-        loop = false;
+    }
+    if(x==2){
+      console.log(x);
+      answerx4= answerx3 - 1;
+      answery4= answery3;
+      if( (0 == answerx4) || (answerx4 > 5) || (0 == answery4) || (answery4 > 5) ){
+        console.log('invalid 2');
+          answerx4= answerx3;
+          answery4= answery3;
       } else{
-        answerx1= answerx;
-        answery1= answery;
-        console.log('invalid position');
+        if(checkBoat(answerx4,answery4)==true){
+          console.log("Boat D: " + answerx3 + ' '+ answery3);
+          console.log("Boat E: " + answerx4 + ' '+ answery4);
+          loop =false;
+          console.log("turned false!");
+        }
       }
-    }else if(x==3){
-      answerx1= answerx;
-      answery1= answery + 1;
-      console.log("boat A " + answerx + ' ' + answery);
-      console.log("boat B " + answerx1 + ' ' + answery1);
-      if( (0 == answerx1 > 5) || (0 == answery1 > 5) ){
-        console.log(x);
-        console.log("Eval 1: " + (0 == answerx1) );
-        console.log("Eval 2: " + (answerx1 > 5) );
-        console.log("Eval 3: " + (0 == answery1) );
-        console.log("Eval 4: " + (answery1 > 5) );
-        console.log("Eval 5: " + (0 == answerx1 > 5));
-        console.log("Eval 6: " + (0 == answery1 > 5));
-        console.log("Eval 7: " + (0 == answerx1 > 5) || (0 == answery1 > 5));
-        answery2 = answery1 + 1;
-        answerx2 = answerx1;
-        if(answery2 > 5){
-           answery2= answery-2;
-          }
-          console.log("boat C " + answerx2 + ' ' + answery2);
-
-
-        console.log('valid position');
-        loop = false;
+    }
+    if(x==3){
+      console.log(x);
+      answerx4= answerx3;
+      answery4= answery3 + 1;
+      if( (0 == answerx4) || (answerx4 > 5) || (0 == answery4) || (answery4 > 5) ){
+        console.log('invalid 3');
+          answerx4= answerx3;
+          answery4= answery3;
       } else{
-        console.log('invalid position');
-        answerx1= answerx;
-        answery1= answery;
-        loop = false;
+        if(checkBoat(answerx4,answery4)==true){
+          console.log("Boat D: " + answerx3 + ' '+ answery3);
+          console.log("Boat E: " + answerx4 + ' '+ answery4);
+          loop =false;
+          console.log("turned false!");
+        }
       }
-    }else{
-      answerx1= answerx;
-      answery1= answery - 1;
-      console.log("boat A " + answerx + ' ' + answery);
-      console.log("boat B " + answerx1 + ' ' + answery1);
-      if( (0 == answerx1 > 5) || (0 == answery1 > 5) ){
-        console.log(x);
-        console.log("Eval 1: " + (0 == answerx1) );
-        console.log("Eval 2: " + (answerx1 > 5) );
-        console.log("Eval 3: " + (0 == answery1) );
-        console.log("Eval 4: " + (answery1 > 5) );
-        console.log("Eval 5: " + (0 == answerx1 > 5));
-        console.log("Eval 6: " + (0 == answery1 > 5));
-        console.log("Eval 7: " + (0 == answerx1 > 5) || (0 == answery1 > 5));
+    }
+    if(x==4){
+      console.log(x);
+      answerx4= answerx3;
+      answery4= answery3 - 1;
+      if( (0 == answerx4) || (answerx4 > 5) || (0 == answery4) || (answery4 > 5) ){
+        console.log('invalid 4');
+         answerx4= answerx3;
+         answery4= answerx3;
+       }else{
+        if(checkBoat(answerx4,answery4)==true){
+          console.log("Boat D: " + answerx3 + ' '+ answery3);
+          console.log("Boat E: " + answerx4 + ' '+ answery4);
+          loop =false;
+          console.log("turned false!");
 
-        answery2 = answery1 - 1;
-        answerx2 = answerx1;
-        if(answery2 == 0){
-           answery2= answery+ 2;
-          }
-          console.log("boat C " + answerx2 + ' ' + answery2);
+        }
+      }
+    }
+  }
+
+}
+
+function checkBoat(x,y){
+  console.log("checking boat... " + x + ' ' + y);
+  var boat = [x,y];
+  console.log("Grid : " + grid[0] + " " + grid[1] + ' ' + grid[2] + " length: " + grid.length);
+  for(var i= 0; i < grid.length; i ++){
+    console.log("Checking: " + boat.toString() + " to " + grid[i].toString());
+    if(boat.toString()==grid[i].toString()) {
+
+      console.log("boat checker false!");
+      return false;
+    }
+  }
+  console.log("boat checker true!");
+  return true;
+}
 
 
-        loop = false;
-        console.log('valid position');
-
-        **/
