@@ -5,7 +5,7 @@ var answerx1 = 0;
 var answery1 = 0;
 var answerx2 = 0;
 var answery2 = 0;
-var grid = [];
+
 
 var answerx3 = 0;
 var answery3 = 0;
@@ -21,28 +21,6 @@ var hits = 0;
 
 
 
-function generateTargets(){
-  var dup = false;
-  answerx = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
-  answery = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
-
-  while(dup == false){
-    answerx1 = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
-    answery1 = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
-    if( (answerx1==answerx) &&  (answery1==answery)  ){
-      answerx1 = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
-      answery1 = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
-    } else{
-      dup = true;
-    }
-  }
-  console.log("Targets: " +  answerx,answery + " " + answerx1, answery1);
-
-}
-
-
-
-
 
 
 
@@ -52,7 +30,7 @@ function generateTargets(){
 function selectSpace(x,y){
   if(($('#grid'+x+y).data('isHit')==true)){
     console.log("alreay hit!");
-  }else if(    (x== answerx && y==answery) || (x== answerx1 && y==answery1) ){
+  }else if(    (x== answerx && y==answery) || (x== answerx1 && y==answery1) || (x== answerx2 && y==answery2) || (x== answerx3 && y==answery3) || (x== answerx4 && y==answery4)){
     $('#grid'+x+y).addClass('buttonHit');
     $('#grid'+x+y).removeClass('buttonunknown');
     $('#grid'+x+y).data('isHit', true);
@@ -72,8 +50,9 @@ function reset(){
   $('[id^="grid"]').removeClass('buttonHit');
   $('[id^="grid"]').addClass('buttonunknown');
   $('[id^="grid"]').data('isHit', false);
-  generateTargets();
+  placeBoat1();
   turns = 5;
+  hits = 0;
 }
 
 function gameWin(){
@@ -106,7 +85,7 @@ function gameLose(){
 function endTurn(result){
   if(result == "hit"){
     hits ++;
-    if(hits == 2){
+    if(hits == 5){
       gameWin();
     }
   } else{
@@ -124,7 +103,7 @@ function gameEnd(){
   $('main').append("<p>You won " + gameWinCounter + " and lost " + gameLossCounter + " times!</p>");
 }
 
-generateTargets();
+placeBoat1();
 
 
 function placeBoat1(){
@@ -135,13 +114,11 @@ function placeBoat1(){
   answery = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
   while(loop == true){
     x = parseInt((Math.random() * (4 - 1 + 1)), 10) + 1;
-
-
     if(x==1){
       answerx1= answerx + 1;
       answery1= answery;
 
-      if( (0 == answerx1) || (answerx1 > 5) || (0 == answery1) || (answery1 > 5) ){
+      if( checkBoatBoundaries(answerx1, answery1) ){
 
           answerx1= answerx;
           answery1= answery;
@@ -165,7 +142,7 @@ function placeBoat1(){
       answery1= answery;
 
 
-      if( (0 == answerx1) || (answerx1 > 5) || (0 == answery1) || (answery1 > 5) ){
+      if( checkBoatBoundaries(answerx1, answery1)  ){
 
         answerx1= answerx;
         answery1= answery;
@@ -188,7 +165,7 @@ function placeBoat1(){
       answery1= answery + 1;
 
 
-      if( (0 == answerx1) || (answerx1 > 5) || (0 == answery1) || (answery1 > 5) ){
+      if( checkBoatBoundaries(answerx1, answery1)  ){
 
 
         answerx1= answerx;
@@ -209,7 +186,7 @@ function placeBoat1(){
       answerx1= answerx;
       answery1= answery - 1;
 
-      if( (0 == answerx1) || (answerx1 > 5) || (0 == answery1) || (answery1 > 5) ){
+      if( checkBoatBoundaries(answerx1, answery1)  ){
         answerx1= answerx;
         answery1= answery;
       } else{
@@ -231,18 +208,18 @@ function placeBoat1(){
   placeBoat2();
 
 
-
-
+  console.log("Boat A :" + answerx + " " + answery);
+  console.log("Boat B :" + answerx1 + " " + answery1);
+  console.log("Boat C :" + answerx2 + " " + answery2);
+  console.log("Boat D :" + answerx3 + " " + answery3);
+  console.log("Boat E :" + answerx4 + " " + answery4);
 }
 
 
 function placeBoat2(){
   var loop = true;
   var x = 0
-  grid = [];
-  grid.push([answerx,answery]);
-  grid.push([answerx1,answery1]);
-  grid.push([answerx2,answery2])
+
 
   answerx3= 0;
   answery3= 0;
@@ -253,7 +230,7 @@ function placeBoat2(){
 
     answerx3 = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
     answery3 = parseInt((Math.random() * (5 - 1 + 1)), 10) + 1;
-    if(checkBoat(answerx3,answery3)==true){
+    if(validateSpace(answerx3,answery3)==true){
       break;
     }
   }
@@ -267,27 +244,17 @@ function placeBoat2(){
     x = parseInt((Math.random() * (4 - 1 + 1)), 10) + 1;
 
 
-    console.log("Test A: " +answerx + " " + answery);
-    console.log("Test B: " +answerx1 + " " + answery1);
-    console.log("Test C: " +answerx2 + " " + answery2);
-    console.log("Test D: " +answerx3 + " " + answery3);
-    console.log("Test E: " +answerx4 + " " + answery4);
-    console.log(loop);
 
     if(x==1){
-      console.log(x);
+
       answerx4= answerx3 + 1;
       answery4= answery3;
-      if( (0 == answerx4) || (answerx4 > 5) || (0 == answery4) || (answery4 > 5) ){
-        console.log('invalid 1');
+      if( checkBoatBoundaries(answerx4, answery4)  ){
           answerx4= answerx3;
           answery4= answery3;
       } else {
-        if(checkBoat(answerx4,answery4)==true){
-          console.log("Boat D: " + answerx3 + ' '+ answery3);
-          console.log("Boat E: " + answerx4 + ' '+ answery4);
+        if(validateSpace(answerx4,answery4)==true){
           loop =false;
-          console.log("turned false!");
         }
       }
     }
@@ -295,16 +262,13 @@ function placeBoat2(){
       console.log(x);
       answerx4= answerx3 - 1;
       answery4= answery3;
-      if( (0 == answerx4) || (answerx4 > 5) || (0 == answery4) || (answery4 > 5) ){
-        console.log('invalid 2');
+      if( checkBoatBoundaries(answerx4, answery4)  ){
+
           answerx4= answerx3;
           answery4= answery3;
       } else{
-        if(checkBoat(answerx4,answery4)==true){
-          console.log("Boat D: " + answerx3 + ' '+ answery3);
-          console.log("Boat E: " + answerx4 + ' '+ answery4);
+        if(validateSpace(answerx4,answery4)==true){
           loop =false;
-          console.log("turned false!");
         }
       }
     }
@@ -312,16 +276,15 @@ function placeBoat2(){
       console.log(x);
       answerx4= answerx3;
       answery4= answery3 + 1;
-      if( (0 == answerx4) || (answerx4 > 5) || (0 == answery4) || (answery4 > 5) ){
-        console.log('invalid 3');
+      if( checkBoatBoundaries(answerx4, answery4)  ){
+
           answerx4= answerx3;
           answery4= answery3;
       } else{
-        if(checkBoat(answerx4,answery4)==true){
-          console.log("Boat D: " + answerx3 + ' '+ answery3);
-          console.log("Boat E: " + answerx4 + ' '+ answery4);
+        if(validateSpace(answerx4,answery4)==true){
+
           loop =false;
-          console.log("turned false!");
+
         }
       }
     }
@@ -329,16 +292,15 @@ function placeBoat2(){
       console.log(x);
       answerx4= answerx3;
       answery4= answery3 - 1;
-      if( (0 == answerx4) || (answerx4 > 5) || (0 == answery4) || (answery4 > 5) ){
-        console.log('invalid 4');
+      if( checkBoatBoundaries(answerx4, answery4)  ){
+
          answerx4= answerx3;
          answery4= answerx3;
        }else{
-        if(checkBoat(answerx4,answery4)==true){
-          console.log("Boat D: " + answerx3 + ' '+ answery3);
-          console.log("Boat E: " + answerx4 + ' '+ answery4);
+        if(validateSpace(answerx4,answery4)==true){
+
           loop =false;
-          console.log("turned false!");
+
 
         }
       }
@@ -347,20 +309,33 @@ function placeBoat2(){
 
 }
 
-function checkBoat(x,y){
-  console.log("checking boat... " + x + ' ' + y);
+function validateSpace(x,y){
+
   var boat = [x,y];
-  console.log("Grid : " + grid[0] + " " + grid[1] + ' ' + grid[2] + " length: " + grid.length);
+  var grid = [];
+  grid.push([answerx,answery]);
+  grid.push([answerx1,answery1]);
+  grid.push([answerx2,answery2])
+
   for(var i= 0; i < grid.length; i ++){
     console.log("Checking: " + boat.toString() + " to " + grid[i].toString());
-    if(boat.toString()==grid[i].toString()) {
+    if( (boat.toString()==grid[i].toString())) {
 
-      console.log("boat checker false!");
+
       return false;
     }
   }
-  console.log("boat checker true!");
+
   return true;
 }
 
+function checkBoatBoundaries(x,y){
+  if(((0 == x) || (x > 5) || (0 == y) || (y > 5))){
 
+    return true;
+  }
+  else{
+    return false;
+  }
+
+}
